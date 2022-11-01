@@ -43,6 +43,15 @@ class ProdutoTest extends TestCase
         $produto->setSlug('produto-1');
         
         $this->assertEquals('produto-1', $produto->getSlug(), 'Valores não são iguais');
-
     }
+
+    /*
+     *  @expectedException \ InvalidArgumentException
+     * @expectedExceptionMessage Parâmetro Inválido Insira Slug
+     */
+    // public function testSeSetSlugLancaExceptionQuandoNaoInformada()
+    // {
+    //     $produto = $this->produto;
+    //     $produto->setSlug('produto-1');
+    // }
 }

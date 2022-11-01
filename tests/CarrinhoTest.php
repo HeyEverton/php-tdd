@@ -9,13 +9,13 @@ class CarrinhoTest extends TestCase
     private $carrinho;
     private $produto;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->carrinho = new Carrinho();
         $this->produto = new Produto();
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         unset($this->carrinho);
         unset($this->produto);
@@ -27,15 +27,14 @@ class CarrinhoTest extends TestCase
     //     $this->assertTrue($classe);
     // }
 
-    protected function assertPreConditions() : void
+    protected function assertPreConditions(): void
     {
         $classe = class_exists('\\Code\\Carrinho');
         $this->assertTrue($classe);
     }
 
-    protected function assertPosConditions() : void
+    protected function assertPosConditions(): void
     {
-        
     }
 
     public function testAdicaoDeProdutosNoCarrinho()
@@ -62,13 +61,16 @@ class CarrinhoTest extends TestCase
 
     public function testSeValoresDeProdutosNoCarrinhoEstaoCorretosConformePassados()
     {
-        $produto = $this->produto;
-        $produto->setName('Produto Teste');
-        $produto->setPrice(19.99);
-        $produto->setSlug('produto-teste');
+        // $produto = $this->produto;
+        // $produto->setName('Produto Teste');
+        // $produto->setPrice(19.99);
+        // $produto->setSlug('produto-teste');
+
+
+        $produtoStub = $this->getStubProduto();
 
         $carrinho = $this->carrinho;
-        $carrinho->addProduto($produto);
+        $carrinho->addProduto($produtoStub);
 
         $this->assertEquals('Produto Teste', $carrinho->getProdutos()[0]->getName());
         $this->assertEquals(19.99, $carrinho->getProdutos()[0]->getPrice());
@@ -94,21 +96,45 @@ class CarrinhoTest extends TestCase
 
         $this->assertEquals(2, $carrinho->getTotalProdutos());
         $this->assertEquals(39.98, $carrinho->getTotalCompra());
-        
     }
 
-    public function testIncompleto()
+    // public function testIncompleto()
+    // {
+    //     $this->assertTrue(true);
+    //     $this->markTestIncomplete('Este teste ainda não está completo');
+    // }
+
+    /*
+     *   @requires PHP == 8.1.6
+     * 
+     */
+    // public function testSeFeatureEspecificaParaVersaoPHP81TrabalhaDeFormaEsperada()
+    // {
+        // if(PHP_VERSION != 8.1) {
+        //     $this->markTestSkipped('Este teste foi pulado');
+        // }
+
+    //     $this->assertTrue(true);
+    // }
+
+    public function testSeLogESalvoQuandoInformadoParaAdicaoDeProduto()
     {
-        $this->assertTrue(true);
-        $this->markTestIncomplete('Este teste ainda não está completo');
+        $carrinho = new Carrinho();
+
+        $logMock = $this->getMockBuilder(Log::class)->setMethods(['log'])->getMock();
+
+        $logMock->expects($this->once())->method('log')->with($this->equalTo('Adicionando produto no carrinho'));
+
+        $carrinho->addProduto($this->getStubProduto(), $logMock);
     }
 
-    public function testSeFeatureEspecificaParaVersaoPHP81TrabalhaDeFormaEsperada()
+    private function getStubProduto()
     {
-        if(PHP_VERSION != 8.1) {
-            $this->markTestSkipped('Este teste foi pulado');
-        }
-        
-        $this->assertTrue(true);
+        $produtoStub = $this->createMock(Produto::class);
+        $produtoStub->method('getName')->willReturn('Produto Teste');
+        $produtoStub->method('getPrice')->willReturn(19.99);
+        $produtoStub->method('getSlug')->willReturn('produto-teste');
+
+        return $produtoStub;
     }
 }
