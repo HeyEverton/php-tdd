@@ -1,8 +1,9 @@
 <?php 
-namespace CodeTests\QueryBuilder;
+namespace CodeTests\QueryBuilder\Query;
 
+use Code\QueryBuilder\Query\Insert;
 use PHPUnit\Framework\TestCase;
-use Code\QueryBuilder\Insert;
+
 
 class InsertTest extends TestCase
 {
@@ -13,12 +14,12 @@ class InsertTest extends TestCase
     }
     protected function setUp(): void
     {
-        $this->insert = new Insert('products', ['name', 'price']);
+        $this->insert = new Insert('products', ['name', 'price', 'id']);
     }
 
     public function testIfQueryInsertionHasGeneratedWithSuccess()
     {
-        $sql = 'INSERT INTO products(name, price) VALUES(:name, :price)';
+        $sql = 'INSERT INTO products(name, price, id) VALUES(:name, :price, :id)';
         $sql2 = 'INSERT INTO products VALUES(:name, :price)';
 
         $this->assertEquals($sql, $this->insert->getSql());

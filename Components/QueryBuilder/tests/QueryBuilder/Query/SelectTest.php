@@ -1,9 +1,10 @@
 <?php
 
-namespace CodeTests\QueryBuilder;
+namespace CodeTests\QueryBuilder\Query;
 
+use Code\QueryBuilder\Query\Select;
 use PHPUnit\Framework\TestCase;
-use Code\QueryBuilder\Select;
+
 
 class SelectTest extends TestCase
 {
