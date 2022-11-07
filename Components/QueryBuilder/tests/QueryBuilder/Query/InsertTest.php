@@ -14,12 +14,12 @@ class InsertTest extends TestCase
     }
     protected function setUp(): void
     {
-        $this->insert = new Insert('products', ['name', 'price', 'id']);
+        $this->insert = new Insert('products', ['name', 'price']);
     }
 
     public function testIfQueryInsertionHasGeneratedWithSuccess()
     {
-        $sql = 'INSERT INTO products(name, price, id) VALUES(:name, :price, :id)';
+        $sql = 'INSERT INTO products(name, price) VALUES(:name, :price)';
         $sql2 = 'INSERT INTO products VALUES(:name, :price)';
 
         $this->assertEquals($sql, $this->insert->getSql());
