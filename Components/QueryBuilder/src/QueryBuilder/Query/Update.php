@@ -2,7 +2,7 @@
 
 namespace Code\QueryBuilder\Query;
 
-class Update
+class Update implements QueryInterface
 {
     public function __construct(string $table, array $fields = array(), array $conditions = array(), array $options = array(), $logicOperator = 'AND')
     {

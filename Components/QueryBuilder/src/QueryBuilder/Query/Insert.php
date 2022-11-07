@@ -1,7 +1,7 @@
 <?php
 namespace Code\QueryBuilder\Query;
 
-class Insert
+class Insert implements QueryInterface
 {
     private $sql;
 

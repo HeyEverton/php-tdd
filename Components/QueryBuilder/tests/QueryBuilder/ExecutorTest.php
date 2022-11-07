@@ -4,10 +4,7 @@ namespace CodeTests\QueryBuilder;
 
 use PHPUnit\Framework\TestCase;
 use Code\QueryBuilder\Executor;
-use Code\QueryBuilder\Query\Insert;
-use Code\QueryBuilder\Query\Select;
-use Code\QueryBuilder\Query\Update;
-
+use Code\QueryBuilder\Query\{Delete, Insert, Select, Update};
 class ExecutorTest extends TestCase
 {
     private static $conn = null;
@@ -93,5 +90,28 @@ class ExecutorTest extends TestCase
 
         $products = $executor->getResult();
         $this->assertEquals('Produto 1 editado', $products[0]['name']);
+    }
+
+    public function testDeleteAProductFromDatabase()
+    {
+        $query = new Delete('products', ['id'=> 1]);
+
+        $executor = $this->executor;
+        $executor->setQuery($query);
+
+        $this->assertTrue($executor->execute());
+
+        $query = (new Select('products'))->where('id', '=', ':id');
+
+        $executor = new Executor(self::$conn);
+
+        $executor->setQuery($query);
+        $executor->setParams(':id', 1); 
+
+        $executor->execute();
+
+        $products = $executor->getResult();
+
+        $this->assertCount(0, $products);
     }
 }

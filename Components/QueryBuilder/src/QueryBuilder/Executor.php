@@ -2,15 +2,27 @@
 
 namespace Code\QueryBuilder;
 
+use Code\QueryBuilder\Query\QueryInterface;
+
 class Executor
 {
+    /**
+     * @var QueryInterface
+     */
     private $query;
+    /**
+     * @var \PDO
+     */
     private $connection;
 
+    /**
+     * @var array
+     */
     private $params = [];
+
     private $result;
 
-    public function __construct(\PDO $connection, $query = null)
+    public function __construct(\PDO $connection, QueryInterface $query = null)
     {
         $this->query = $query;
         $this->connection = $connection;
@@ -22,7 +34,7 @@ class Executor
         return $this;
     }
 
-    public function setQuery($query)
+    public function setQuery(QueryInterface $query)
     {
         $this->query = $query;
     }
