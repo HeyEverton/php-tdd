@@ -8,4 +8,9 @@ class ProductController
         return 'Controller Product';
     }
 
+    public function show($id)
+    {
+        return 'Rota com parametro & parametro é igual a ' . $id;
+    }
+
 }

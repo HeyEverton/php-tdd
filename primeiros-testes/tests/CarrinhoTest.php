@@ -12,13 +12,11 @@ class CarrinhoTest extends TestCase
     public function setUp(): void
     {
         $this->carrinho = new Carrinho();
-        $this->produto = new Produto();
     }
 
     public function tearDown(): void
     {
         unset($this->carrinho);
-        unset($this->produto);
     }
 
     // public function testSeClasseCarrinhoExiste()
@@ -39,12 +37,12 @@ class CarrinhoTest extends TestCase
 
     public function testAdicaoDeProdutosNoCarrinho()
     {
-        $produto = $this->produto;
+        $produto = new Produto();
         $produto->setName('Produto Teste');
         $produto->setPrice(19.99);
         $produto->setSlug('produto-teste');
 
-        $produto2 = $this->produto;
+        $produto2 = new Produto();
         $produto2->setName('Produto Teste2');
         $produto2->setPrice(19.90);
         $produto2->setSlug('produto-teste2');
@@ -79,23 +77,29 @@ class CarrinhoTest extends TestCase
 
     public function testeSeTotalDeProdutosEValorDaCompraEstaoCorretos()
     {
-        $produto = $this->produto;
+        $produto = new Produto();
         $produto->setName('Produto Teste');
         $produto->setPrice(19.99);
         $produto->setSlug('produto-teste');
 
-        $produto2 = $this->produto;
+        $produto2 = new Produto();
         $produto2->setName('Produto Teste2');
-        $produto2->setPrice(19.99);
+        $produto2->setPrice(29.99);
         $produto2->setSlug('produto-teste2');
+
+        $produto3 = new Produto();
+        $produto3->setName('Produto Teste3');
+        $produto3->setPrice(1);
+        $produto3->setSlug('produto-teste3');
 
 
         $carrinho = $this->carrinho;
         $carrinho->addProduto($produto);
         $carrinho->addProduto($produto2);
+        $carrinho->addProduto($produto3);
 
-        $this->assertEquals(2, $carrinho->getTotalProdutos());
-        $this->assertEquals(39.98, $carrinho->getTotalCompra());
+        $this->assertEquals(3, $carrinho->getTotalProdutos());
+        $this->assertEquals(50.98, $carrinho->getTotalCompra());
     }
 
     // public function testIncompleto()

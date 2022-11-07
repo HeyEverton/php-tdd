@@ -53,8 +53,10 @@ class Router
             return $route();
         }
 
-        if (is_string($route))
-            return $this->controllerResolver($route);
+        if (is_string($route)) {
+            $parameters = $wildcard->getParameters();
+            return $this->controllerResolver($route, $parameters);
+        }
     }
 
     private function controllerResolver($route, $parameters = [])

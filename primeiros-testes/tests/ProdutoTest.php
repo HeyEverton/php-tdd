@@ -29,14 +29,15 @@ class ProdutoTest extends TestCase
         $this->assertEquals('Produto 1', $produto->getName(), 'Valores não são iguais');
 
     }
-    public function testSeOPrecoDoProdutoESetadoCorretamente()
-    {
-        $produto = $this->produto;
-        $produto->setPrice(19,99);
-        
-        $this->assertEquals(19,99, $produto->getPrice(), 'Valores não são iguais');
 
-    }
+    // public function testSeOPrecoDoProdutoESetadoCorretamente()
+    // {
+    //     $produto = $this->produto;
+    //     $produto->setPrice(19,99);
+        
+    //     $this->assertEquals(19,99, $produto->getPrice(), 'Valores não são iguais');
+    // }
+
     public function testSeOSlugDoProdutoESetadoCorretamente()
     {
         $produto = $this->produto;
