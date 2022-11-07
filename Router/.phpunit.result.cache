@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":[]}
+{"version":1,"defects":{"CodeTests\\Router\\RouterTest::testRouterSetOfRoutes":4,"CodeTests\\Router\\RouterTest::testValidateANoRouteFound":4,"CodeTests\\Router\\RouterTest::testWithAControllerAssociate":4},"times":{"CodeTests\\Router\\RouterTest::testRouterSetOfRoutes":0.003,"CodeTests\\Router\\RouterTest::testValidateANoRouteFound":0,"CodeTests\\Router\\RouterTest::testWithAControllerAssociate":0,"CodeTests\\Router\\RouterTest::testAWrongFormatToACallControllerAsASecondParameterOfTheOurRouter":0}}
